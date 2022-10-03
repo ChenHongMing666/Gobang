@@ -4,7 +4,7 @@ import Chess.Chess;
 
 public class ChessMap {
 
-    public Chess[][] map;
+    public  static Chess[][] map;
     public int size;
 
     /**
@@ -18,10 +18,10 @@ public class ChessMap {
      * 把map中的每一项设为0
      */
     public void setUpMap() {
-        for (int line = 0; line < this.map.length; line++) {
-            for (int row = 0; row < this.map.length; row++) {
+        for (int line = 0; line < map.length; line++) {
+            for (int row = 0; row < map.length; row++) {
                 int temp[] = {row , line} ;
-                this.map[line][row] = new Chess( temp , 'n');
+                map[line][row] = new Chess( temp , 'n');
             }
         }
     }
@@ -43,7 +43,7 @@ public class ChessMap {
      */
     public ChessMap(int size) {
         this.size = size;
-        this.map = new Chess[size][size];
+        map = new Chess[size][size];
         setUpMap();
     }
 
@@ -76,15 +76,29 @@ public class ChessMap {
     public static char toChess(Chess aChess){
         switch (aChess.whoes){
             case 'n' :
-                return '⬜';
+                return '□';
             case 'r' :
-                return '⚪';
+                return '●';
             case 'b' :
-                return '⚫';
+                return '○';
             
             default :
                 return ' ' ;
         }
     }
+
+    // public static boolean isRedWin(){
+    //     for (Chess[] line : map ){
+    //         for (Chess chess : line) {
+    //             if(chess.whoes == 'n' && chess.whoes == 'b'){
+    //                 continue ;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // public static int deepFirstSearch(char searchWho ){
+
+    // }
 
 }
