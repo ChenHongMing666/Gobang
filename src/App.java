@@ -77,4 +77,7 @@ public class App {
         return ;
     }
 
+    public static boolean isWin(){
+        return true ;
+    }
 }
