@@ -76,11 +76,11 @@ public class ChessMap {
     public static char toChess(Chess aChess){
         switch (aChess.whoes){
             case 'n' :
-                return '☐';
+                return '⬜';
             case 'r' :
-                return '☑';
+                return '⚪';
             case 'b' :
-                return '☒';
+                return '⚫';
             
             default :
                 return ' ' ;
