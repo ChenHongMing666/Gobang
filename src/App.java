@@ -1,10 +1,22 @@
 import java.util.Scanner;
 import ChessMap.ChessMap;
+import java.util.concurrent.TimeUnit;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        int a = input("your age:");
-        System.out.print(a);
+        ChessMap map = new ChessMap(10);
+        boolean Flag = true ;
+
+        print("===Wellcome to Gobang Game !===\n");
+
+        for (int i = 3 ; i >= 0 ; i -- ){
+            print( "\t" , i , "\r");
+            TimeUnit.SECONDS.sleep(1);
+        }
+
+        while( Flag ) {
+
+        }
     }
 
     /**
@@ -24,6 +36,12 @@ public class App {
         }
 
         return temp;
+    }
+
+    public static void print(Object...args){
+        for (Object string : args) {
+            System.out.print(string);
+        }
     }
 
 }
