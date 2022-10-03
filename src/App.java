@@ -3,7 +3,8 @@ import ChessMap.ChessMap;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        int a = input("your age");
+        int a = input("your age:");
+        System.out.print(a);
     }
 
     /**
