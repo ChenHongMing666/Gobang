@@ -4,13 +4,13 @@ import Chess.Chess;
 
 public class ChessMap {
 
-    public Object[][] map;
+    public Chess[][] map;
     public int size;
 
     /**
      * @return 返回一个二维数组为棋盘
      */
-    public Object[][] getMap() {
+    public Chess[][] getMap() {
         return map;
     }
 
@@ -20,7 +20,8 @@ public class ChessMap {
     public void setUpMap() {
         for (int line = 0; line < this.map.length; line++) {
             for (int row = 0; row < this.map.length; row++) {
-                this.map[line][row] = 0;
+                int temp[] = {row , line} ;
+                this.map[line][row] = new Chess( temp , 'n');
             }
         }
     }
@@ -29,9 +30,9 @@ public class ChessMap {
      * 以字符方阵输出棋盘 （可作为前期的交互界面）
      */
     public void mapOut() {
-        for (Object[] objects : map) {
-            for (Object object : objects) {
-                System.out.print(object);
+        for (Chess[] objects : map) {
+            for (Chess object : objects) {
+                System.out.print(toChess(object));
             }
             System.out.println();
         }
@@ -42,7 +43,7 @@ public class ChessMap {
      */
     public ChessMap(int size) {
         this.size = size;
-        this.map = new Object[size][size];
+        this.map = new Chess[size][size];
         setUpMap();
     }
 
@@ -57,11 +58,33 @@ public class ChessMap {
             return false;
         }
 
+        if (map[y][x].whoes != 'n' ){
+            return false ;
+        }
+
         int[] pos = { x, y };
         Chess newChess = new Chess(pos, who);
         map[y][x] = newChess;
 
         return true;
+    }
+
+    /**
+     * @param aChess 当前位置的棋子
+     * @return 返回棋子相应的样式
+     */
+    public static char toChess(Chess aChess){
+        switch (aChess.whoes){
+            case 'n' :
+                return '☐';
+            case 'r' :
+                return '☑';
+            case 'b' :
+                return '☒';
+            
+            default :
+                return ' ' ;
+        }
     }
 
 }
