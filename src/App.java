@@ -2,6 +2,8 @@ import java.util.Scanner;
 import ChessMap.ChessMap;
 import java.util.concurrent.TimeUnit;
 
+import Chess.Chess;
+
 public class App {
     public static boolean Flag = true ;
     public static ChessMap map = new ChessMap(10);
@@ -24,13 +26,20 @@ public class App {
         while( Flag ) {
             // red[0] = input("your Chess's x");
             // red[1] = input("your Chess's y");
+            map.mapOut();
 
             getIn('r');
             map.mapOut();
             getIn('b');
-            map.mapOut();
+            
+            char Iswin = map.isWin() ;
 
-            Flag = input("Exit(1/0)") == 0;
+            if ( Iswin != 'n'){
+                Flag = false ;
+                print(Iswin);
+                Flag = input("Exit(1/0)") == 0;
+            }
+
         }
     }
 

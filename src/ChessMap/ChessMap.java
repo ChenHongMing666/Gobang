@@ -33,6 +33,7 @@ public class ChessMap {
         for (Chess[] objects : map) {
             for (Chess object : objects) {
                 System.out.print(toChess(object));
+                System.out.print(" ");
             }
             System.out.println();
         }
@@ -86,6 +87,37 @@ public class ChessMap {
                 return ' ' ;
         }
     }
+
+
+    /**
+     * @return
+     */
+    public static char isWin(){
+        for (int lines = 0 ; lines < map.length ; lines ++){
+            for (int row = 0 ; row < map[lines].length ; row ++) {
+                try{
+                    if (mapCopare(lines, row, 5)){
+                        return map[lines][row].whoes;
+                    }
+                    else{
+                        continue;
+                    }
+                } catch (ArrayIndexOutOfBoundsException a){
+                    continue ;
+                }
+            }
+        }
+        return 'n';
+    }
+
+    private static boolean mapCopare (int line , int row , int time){
+        for (int i = 0 ; i < time ; i ++){
+            if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
+                return false ;
+            }
+        }
+        return true ;
+    } 
 
     // public static boolean isRedWin(){
     //     for (Chess[] line : map ){
