@@ -93,12 +93,35 @@ public class ChessMap {
     //             if(chess.whoes == 'n' && chess.whoes == 'b'){
     //                 continue ;
     //             }
+    //             else if(deepFirstSearch('r') == 5){
+    //                 return true ;
+    //             }
+    //             else {
+    //                 return false ;
+    //             }
     //         }
     //     }
+    //     return false ;
     // }
 
     // public static int deepFirstSearch(char searchWho ){
+    //     int[][] next = {
+    //         {1,1},
+    //         {1,0},
+    //         // {0,0},
+    //         {0,1},
+    //         {-1,-1},
+    //         {-1,0},
+    //         // {0,0},
+    //         {0,-1}
+    //     };
+    //     int sum = 0 ;
 
+    //     for (Chess[] lines : map){
+    //         for (Chess aChess : lines) {
+                
+    //         }
+    //     }
     // }
 
 }
