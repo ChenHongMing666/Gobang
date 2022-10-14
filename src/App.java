@@ -22,22 +22,31 @@ public class App {
             print(  i , "\r");
             TimeUnit.SECONDS.sleep(1);
         }
-
+        char Iswin = map.isWin();
         while( Flag ) {
-            // red[0] = input("your Chess's x");
-            // red[1] = input("your Chess's y");
-            map.mapOut();
+            Iswin = map.isWin();
 
-            getIn('r');
             map.mapOut();
-            getIn('b');
-            
-            char Iswin = map.isWin();
+            getIn('r');
 
             if ( Iswin != 'n'){
                 Flag = false ;
                 print(Iswin);
                 Flag = input("Exit(1/0)") == 0;
+                map.setUpMap();
+                Iswin = map.isWin();
+            }
+
+            map.mapOut();
+            getIn('b');           
+
+            if ( Iswin != 'n'){
+                Flag = false ;
+                print(Iswin);
+                print("win");
+                Flag = input("Exit(1/0)") == 0;
+                map.setUpMap();
+                Iswin = map.isWin();
             }
 
         }
@@ -48,7 +57,7 @@ public class App {
      * @return 返回输入的Int数据
      * 类比 python 的 input
      */
-    public static int input(String prompt) {
+    private static int input(String prompt) {
         int temp;
         print(prompt , ":");
 
@@ -66,7 +75,7 @@ public class App {
      * @param args 要打印的字符
      * 类比 python 的 print
      */
-    public static void print(Object...args){
+    private static void print(Object...args){
         for (Object string : args) {
             System.out.print(string);
         }

@@ -157,7 +157,7 @@ public class ChessMap {
         for (int lines = 0 ; lines < map.length ; lines ++){
             for (int row = 0 ; row < map[lines].length ; row ++) {
                 try{
-                    if (mapCopare(lines, row, 5)){
+                    if (mapCopareLine(lines, row, 4) || mapCopareRrow(lines, row, 4) || mapCopareSlash(lines, row, 4)){
                         return map[lines][row].whoes;
                     }
                     else{
@@ -177,19 +177,39 @@ public class ChessMap {
      * @param time 几个连一起
      * @return 是否连一起
      */
-    private static boolean mapCopare (int line , int row , int time){
+    private static boolean mapCopareLine (int line , int row , int time){
         for (int i = 0 ; i < time ; i ++){
-            if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
+            if( !(map[line][row].whoes ==  map[line][row + i].whoes)){
                 return false ;
             }
         }
+        return true ;
+    } 
+
+    /**
+     * @param line 棋子所在の行
+     * @param row 棋子所在的列
+     * @param time 几个连一起
+     * @return 是否连一起
+     */
+    private static boolean mapCopareRrow (int line , int row , int time){
         for (int i = 0 ; i < time ; i ++){
             if( !(map[line][row].whoes ==  map[line + i][row].whoes)){
                 return false ;
             }
         }
+        return true ;
+    } 
+
+    /**
+     * @param line 棋子所在の行
+     * @param row 棋子所在的列
+     * @param time 几个连一起
+     * @return 是否连一起
+     */
+    private static boolean mapCopareSlash (int line , int row , int time){
         for (int i = 0 ; i < time ; i ++){
-            if( !(map[line][row].whoes ==  map[line][row + i].whoes)){
+            if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
                 return false ;
             }
         }
