@@ -34,10 +34,10 @@ public class ChessMap {
             for (int row = 0 ; row < size ; row ++) {
                 if (map[lines][row].whoes == 'n'){
                     switch(lines){
-                        case 1:
+                        case 0:
                             switch (row)
                             {
-                                case 1:
+                                case 0:
                                     print("┌"); 
                                     break ;
                                 case 9:
@@ -52,7 +52,7 @@ public class ChessMap {
                         case 9 :
                             switch (row)
                             {
-                                case 1 :
+                                case 0 :
                                     print("└");
                                     break ;
                                 case 9 :
@@ -66,7 +66,7 @@ public class ChessMap {
                         default :
                             switch(row)
                             {
-                                case 1:
+                                case 0:
                                     print("├");
                                     break ; 
                                 case 9 :
@@ -74,19 +74,30 @@ public class ChessMap {
                                     break ;
                                 default :
                                     print("┼");
-                                    break ;
+                                    break ; 
                             }
                             break ;
                     }
                 }
-                print("─");
+                else{
+                    print(toChess(map[lines][row]));
+                }
+                if (row != size -1){
+                    print("─");
+                } 
             }
             System.out.println();
         }
     }
 
+    /**
+     * @param args 要打印の东西
+     */
     private static void print(Object...args){
-        System.out.print(args);
+        for (Object object : args) {
+            System.out.print(object);
+        }
+        
     }
 
     /**
@@ -169,6 +180,16 @@ public class ChessMap {
     private static boolean mapCopare (int line , int row , int time){
         for (int i = 0 ; i < time ; i ++){
             if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
+                return false ;
+            }
+        }
+        for (int i = 0 ; i < time ; i ++){
+            if( !(map[line][row].whoes ==  map[line + i][row].whoes)){
+                return false ;
+            }
+        }
+        for (int i = 0 ; i < time ; i ++){
+            if( !(map[line][row].whoes ==  map[line][row + i].whoes)){
                 return false ;
             }
         }
