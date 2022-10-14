@@ -32,7 +32,7 @@ public class App {
             map.mapOut();
             getIn('b');
             
-            char Iswin = map.isWin() ;
+            char Iswin = map.isWin();
 
             if ( Iswin != 'n'){
                 Flag = false ;

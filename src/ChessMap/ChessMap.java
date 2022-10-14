@@ -5,7 +5,7 @@ import Chess.Chess;
 public class ChessMap {
 
     public  static Chess[][] map;
-    public int size;
+    public final int size;
 
     /**
      * @return 返回一个二维数组为棋盘
@@ -30,13 +30,63 @@ public class ChessMap {
      * 以字符方阵输出棋盘 （可作为前期的交互界面）
      */
     public void mapOut() {
-        for (Chess[] objects : map) {
-            for (Chess object : objects) {
-                System.out.print(toChess(object));
-                System.out.print(" ");
+        for (int lines = 0 ; lines < size ; lines ++) {
+            for (int row = 0 ; row < size ; row ++) {
+                if (map[lines][row].whoes == 'n'){
+                    switch(lines){
+                        case 1:
+                            switch (row)
+                            {
+                                case 1:
+                                    print("┌"); 
+                                    break ;
+                                case 9:
+                                    print('┐');
+                                    break ; 
+                                default :
+                                    print("┬");
+                                    break ;
+                        
+                            }
+                            break ;
+                        case 9 :
+                            switch (row)
+                            {
+                                case 1 :
+                                    print("└");
+                                    break ;
+                                case 9 :
+                                    print("┘");
+                                    break ;
+                                default :
+                                    print("┴");
+                                    break ;
+                            }
+                            break ;
+                        default :
+                            switch(row)
+                            {
+                                case 1:
+                                    print("├");
+                                    break ; 
+                                case 9 :
+                                    print("┤");
+                                    break ;
+                                default :
+                                    print("┼");
+                                    break ;
+                            }
+                            break ;
+                    }
+                }
+                print("─");
             }
             System.out.println();
         }
+    }
+
+    private static void print(Object...args){
+        System.out.print(args);
     }
 
     /**
@@ -90,9 +140,9 @@ public class ChessMap {
 
 
     /**
-     * @return
+     * @return 是否有一个玩家胜利
      */
-    public static char isWin(){
+    public char isWin(){
         for (int lines = 0 ; lines < map.length ; lines ++){
             for (int row = 0 ; row < map[lines].length ; row ++) {
                 try{
@@ -110,6 +160,12 @@ public class ChessMap {
         return 'n';
     }
 
+    /**
+     * @param line 棋子所在の行
+     * @param row 棋子所在的列
+     * @param time 几个连一起
+     * @return 是否连一起
+     */
     private static boolean mapCopare (int line , int row , int time){
         for (int i = 0 ; i < time ; i ++){
             if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
@@ -119,7 +175,7 @@ public class ChessMap {
         return true ;
     } 
 
-    // public static boolean isRedWin(){
+    /*  public static boolean isRedWin(){
     //     for (Chess[] line : map ){
     //         for (Chess chess : line) {
     //             if(chess.whoes == 'n' && chess.whoes == 'b'){
@@ -154,6 +210,6 @@ public class ChessMap {
                 
     //         }
     //     }
-    // }
+    // }*/
 
 }
