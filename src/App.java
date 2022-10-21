@@ -35,6 +35,7 @@ public class App {
                 Flag = input("Exit(1/0)") == 0;
                 map.setUpMap();
                 Iswin = map.isWin();
+                continue ;
             }
 
             map.mapOut();
@@ -47,6 +48,7 @@ public class App {
                 Flag = input("Exit(1/0)") == 0;
                 map.setUpMap();
                 Iswin = map.isWin();
+                continue ;
             }
 
         }
