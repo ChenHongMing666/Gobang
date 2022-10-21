@@ -31,6 +31,7 @@ public class ChessMap {
      */
     public void mapOut() {
         for (int lines = 0 ; lines < size ; lines ++) {
+            print("\033[44m");
             for (int row = 0 ; row < size ; row ++) {
                 if (map[lines][row].whoes == 'n'){
                     switch(lines){
@@ -86,7 +87,7 @@ public class ChessMap {
                     print("─");
                 } 
             }
-            System.out.println();
+            System.out.println("\033[m");
         }
     }
 
@@ -148,7 +149,6 @@ public class ChessMap {
                 return ' ' ;
         }
     }
-
 
     /**
      * @return 是否有一个玩家胜利

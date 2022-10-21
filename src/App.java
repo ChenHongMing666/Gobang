@@ -22,9 +22,15 @@ public class App {
             print(  i , "\r");
             TimeUnit.SECONDS.sleep(1);
         }
+
         char Iswin = map.isWin();
+        long startTime , endTime , usedTime;
+        
         while( Flag ) {
             Iswin = map.isWin();
+            /** 获取当前系统时间*/
+            startTime =  System.currentTimeMillis();
+            /** 程序运行 processRun();*/
 
             map.mapOut();
             getIn('r');
@@ -37,6 +43,11 @@ public class App {
                 Iswin = map.isWin();
                 continue ;
             }
+
+            endTime =  System.currentTimeMillis();
+            usedTime = (endTime-startTime)/1000;
+            print("you spent " , usedTime , "seconds on this chess.\n");
+            startTime =  System.currentTimeMillis();
 
             map.mapOut();
             getIn('b');           
@@ -51,6 +62,11 @@ public class App {
                 continue ;
             }
 
+            /** 获取当前的系统时间，与初始时间相减就是程序运行的毫秒数，除以1000就是秒数*/
+            endTime =  System.currentTimeMillis();
+            usedTime = (endTime-startTime)/1000;
+            print("you spent " , usedTime , "seconds on this chess.\n");
+
         }
     }
 
@@ -60,6 +76,7 @@ public class App {
      * 类比 python 的 input
      */
     private static int input(String prompt) {
+ 
         int temp;
         print(prompt , ":");
 
@@ -71,7 +88,7 @@ public class App {
         }
 
         return temp;
-    }
+    } 
 
     /**
      * @param args 要打印的字符
