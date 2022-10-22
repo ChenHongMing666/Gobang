@@ -4,7 +4,7 @@ import Chess.Chess;
 
 public class ChessMap {
 
-    public  static Chess[][] map;
+    public static Chess[][] map;
     public final int size;
 
     /**
@@ -20,8 +20,8 @@ public class ChessMap {
     public void setUpMap() {
         for (int line = 0; line < map.length; line++) {
             for (int row = 0; row < map.length; row++) {
-                int temp[] = {row , line} ;
-                map[line][row] = new Chess( temp , 'n');
+                int temp[] = { row, line };
+                map[line][row] = new Chess(temp, 'n');
             }
         }
     }
@@ -30,62 +30,58 @@ public class ChessMap {
      * 以字符方阵输出棋盘 （可作为前期的交互界面）
      */
     public void mapOut() {
-        for (int lines = 0 ; lines < size ; lines ++) {
+        for (int lines = 0; lines < size; lines++) {
             print("\033[44m");
-            for (int row = 0 ; row < size ; row ++) {
-                if (map[lines][row].whoes == 'n'){
-                    switch(lines){
+            for (int row = 0; row < size; row++) {
+                if (map[lines][row].whoes == 'n') {
+                    switch (lines) {
                         case 0:
-                            switch (row)
-                            {
+                            switch (row) {
                                 case 0:
-                                    print("┌"); 
-                                    break ;
+                                    print("┌");
+                                    break;
                                 case 9:
                                     print('┐');
-                                    break ; 
-                                default :
+                                    break;
+                                default:
                                     print("┬");
-                                    break ;
-                        
+                                    break;
+
                             }
-                            break ;
-                        case 9 :
-                            switch (row)
-                            {
-                                case 0 :
+                            break;
+                        case 9:
+                            switch (row) {
+                                case 0:
                                     print("└");
-                                    break ;
-                                case 9 :
+                                    break;
+                                case 9:
                                     print("┘");
-                                    break ;
-                                default :
+                                    break;
+                                default:
                                     print("┴");
-                                    break ;
+                                    break;
                             }
-                            break ;
-                        default :
-                            switch(row)
-                            {
+                            break;
+                        default:
+                            switch (row) {
                                 case 0:
                                     print("├");
-                                    break ; 
-                                case 9 :
+                                    break;
+                                case 9:
                                     print("┤");
-                                    break ;
-                                default :
+                                    break;
+                                default:
                                     print("┼");
-                                    break ; 
+                                    break;
                             }
-                            break ;
+                            break;
                     }
-                }
-                else{
+                } else {
                     print(toChess(map[lines][row]));
                 }
-                if (row != size -1){
+                if (row != size - 1) {
                     print("─");
-                } 
+                }
             }
             System.out.println("\033[m");
         }
@@ -94,11 +90,11 @@ public class ChessMap {
     /**
      * @param args 要打印の东西
      */
-    private static void print(Object...args){
+    private static void print(Object... args) {
         for (Object object : args) {
             System.out.print(object);
         }
-        
+
     }
 
     /**
@@ -121,8 +117,8 @@ public class ChessMap {
             return false;
         }
 
-        if (map[y][x].whoes != 'n' ){
-            return false ;
+        if (map[y][x].whoes != 'n') {
+            return false;
         }
 
         int[] pos = { x, y };
@@ -136,35 +132,32 @@ public class ChessMap {
      * @param aChess 当前位置的棋子
      * @return 返回棋子相应的样式
      */
-    public static char toChess(Chess aChess){
-        switch (aChess.whoes){
-            case 'n' :
-                return '□';
-            case 'r' :
+    public static char toChess(Chess aChess) {
+        switch (aChess.whoes) {
+            case 'r':
                 return '●';
-            case 'b' :
+            case 'b':
                 return '○';
-            
-            default :
-                return ' ' ;
+
+            default:
+                return ' ';
         }
     }
 
     /**
      * @return 是否有一个玩家胜利
      */
-    public char isWin(){
-        for (int lines = 0 ; lines < map.length ; lines ++){
-            for (int row = 0 ; row < map[lines].length ; row ++) {
-                try{
-                    if (mapCopareLine(lines, row, 4) || mapCopareRrow(lines, row, 4) || mapCopareSlash(lines, row, 4)){
+    public char isWin() {
+        for (int lines = 0; lines < map.length; lines++) {
+            for (int row = 0; row < map[lines].length; row++) {
+                try {
+                    if (mapCopareLine(lines, row, 4) || mapCopareRrow(lines, row, 4) || mapCopareSlash(lines, row, 4)) {
                         return map[lines][row].whoes;
-                    }
-                    else{
+                    } else {
                         continue;
                     }
-                } catch (ArrayIndexOutOfBoundsException a){
-                    continue ;
+                } catch (ArrayIndexOutOfBoundsException a) {
+                    continue;
                 }
             }
         }
@@ -173,84 +166,86 @@ public class ChessMap {
 
     /**
      * @param line 棋子所在の行
-     * @param row 棋子所在的列
+     * @param row  棋子所在的列
      * @param time 几个连一起
      * @return 是否连一起
      */
-    private static boolean mapCopareLine (int line , int row , int time){
-        for (int i = 0 ; i < time ; i ++){
-            if( !(map[line][row].whoes ==  map[line][row + i].whoes)){
-                return false ;
+    private static boolean mapCopareLine(int line, int row, int time) {
+        for (int i = 0; i < time; i++) {
+            if (!(map[line][row].whoes == map[line][row + i].whoes)) {
+                return false;
             }
         }
-        return true ;
-    } 
+        return true;
+    }
 
     /**
      * @param line 棋子所在の行
-     * @param row 棋子所在的列
+     * @param row  棋子所在的列
      * @param time 几个连一起
      * @return 是否连一起
      */
-    private static boolean mapCopareRrow (int line , int row , int time){
-        for (int i = 0 ; i < time ; i ++){
-            if( !(map[line][row].whoes ==  map[line + i][row].whoes)){
-                return false ;
+    private static boolean mapCopareRrow(int line, int row, int time) {
+        for (int i = 0; i < time; i++) {
+            if (!(map[line][row].whoes == map[line + i][row].whoes)) {
+                return false;
             }
         }
-        return true ;
-    } 
+        return true;
+    }
 
     /**
      * @param line 棋子所在の行
-     * @param row 棋子所在的列
+     * @param row  棋子所在的列
      * @param time 几个连一起
      * @return 是否连一起
      */
-    private static boolean mapCopareSlash (int line , int row , int time){
-        for (int i = 0 ; i < time ; i ++){
-            if( !(map[line][row].whoes ==  map[line + i][row + i].whoes)){
-                return false ;
+    private static boolean mapCopareSlash(int line, int row, int time) {
+        for (int i = 0; i < time; i++) {
+            if (!(map[line][row].whoes == map[line + i][row + i].whoes)) {
+                return false;
             }
         }
-        return true ;
-    } 
+        return true;
+    }
 
-    /*  public static boolean isRedWin(){
-    //     for (Chess[] line : map ){
-    //         for (Chess chess : line) {
-    //             if(chess.whoes == 'n' && chess.whoes == 'b'){
-    //                 continue ;
-    //             }
-    //             else if(deepFirstSearch('r') == 5){
-    //                 return true ;
-    //             }
-    //             else {
-    //                 return false ;
-    //             }
-    //         }
-    //     }
-    //     return false ;
-    // }
-
-    // public static int deepFirstSearch(char searchWho ){
-    //     int[][] next = {
-    //         {1,1},
-    //         {1,0},
-    //         // {0,0},
-    //         {0,1},
-    //         {-1,-1},
-    //         {-1,0},
-    //         // {0,0},
-    //         {0,-1}
-    //     };
-    //     int sum = 0 ;
-
-    //     for (Chess[] lines : map){
-    //         for (Chess aChess : lines) {
-                
-    //         }
-    //     }
-    // }*/
+    /*
+     * public static boolean isRedWin(){
+     * // for (Chess[] line : map ){
+     * // for (Chess chess : line) {
+     * // if(chess.whoes == 'n' && chess.whoes == 'b'){
+     * // continue ;
+     * // }
+     * // else if(deepFirstSearch('r') == 5){
+     * // return true ;
+     * // }
+     * // else {
+     * // return false ;
+     * // }
+     * // }
+     * // }
+     * // return false ;
+     * // }
+     * 
+     * // public static int deepFirstSearch(char searchWho ){
+     * // int[][] next = {
+     * // {1,1},
+     * // {1,0},
+     * // // {0,0},
+     * // {0,1},
+     * // {-1,-1},
+     * // {-1,0},
+     * // // {0,0},
+     * // {0,-1}
+     * // };
+     * // int sum = 0 ;
+     * 
+     * // for (Chess[] lines : map){
+     * // for (Chess aChess : lines) {
+     * 
+     * // }
+     * // }
+     * // }
+     */
 
 }

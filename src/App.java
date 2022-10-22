@@ -2,72 +2,85 @@ import java.util.Scanner;
 import ChessMap.ChessMap;
 import java.util.concurrent.TimeUnit;
 
-import Chess.Chess;
+import settings.AppSettings;
 
 public class App {
-    public static boolean Flag = true ;
-    public static ChessMap map = new ChessMap(10);
+    public static boolean Flag = true;
+    public static ChessMap map = new ChessMap(AppSettings.mapSize);
+    public static int Languane = 0 ;
 
     /**
-     * @param args 用不着
+     * @param args 用不着;
      * @throws Exception 也用不着
-     * 
      * 程序的入口
      */
     public static void main(String[] args) throws Exception {
+        Languane = input("Languae:(0-EN/1-CH)");
 
-        print("===Wellcome to Gobang Game !===\n");
+        // 输出title
+        print("===", AppSettings.title[Languane] , "===\n");
 
-        for (int i = 3 ; i >= 0 ; i -- ){
-            print(  i , "\r");
+        // 等待3秒
+        for (int i = 3; i >= 0; i--) {
+            print(i, "\r");
             TimeUnit.SECONDS.sleep(1);
         }
 
+        // 变量初始化
         char Iswin = map.isWin();
-        long startTime , endTime , usedTime;
-        
-        while( Flag ) {
-            Iswin = map.isWin();
-            /** 获取当前系统时间*/
-            startTime =  System.currentTimeMillis();
-            /** 程序运行 processRun();*/
+        long startTime, endTime, usedTime;
 
+        // 主循环
+        while (Flag) {
+
+            Iswin = map.isWin();
+
+            /** 获取当前系统时间 */
+            startTime = System.currentTimeMillis();
+
+            // 输出地图，输入棋子坐标 IO
             map.mapOut();
             getIn('r');
 
-            if ( Iswin != 'n'){
-                Flag = false ;
+            // 判断是否获胜
+            if (Iswin != 'n') {
+                Flag = false;
                 print(Iswin);
-                Flag = input("Exit(1/0)") == 0;
+                print(AppSettings.winPrommpt[Languane]);
+                Flag = input(AppSettings.countinuePrompt[Languane]) == 0;
                 map.setUpMap();
                 Iswin = map.isWin();
-                continue ;
+                continue;
             }
 
-            endTime =  System.currentTimeMillis();
-            usedTime = (endTime-startTime)/1000;
-            print("you spent " , usedTime , "seconds on this chess.\n");
-            startTime =  System.currentTimeMillis();
+            // 结束计时
+            endTime = System.currentTimeMillis();
+            usedTime = (endTime - startTime) / 1000;
+            print(AppSettings.timeUsedPrompt[Languane][0], usedTime, AppSettings.timeUsedPrompt[Languane][1],"\n");
+            startTime = System.currentTimeMillis();
 
+            // 输出地图，输入棋子坐标 IO
             map.mapOut();
-            getIn('b');           
+            getIn('b');
 
-            if ( Iswin != 'n'){
-                Flag = false ;
+            // 判断是否获胜
+            if (Iswin != 'n') {
+                Flag = false;
                 print(Iswin);
-                print("win");
-                Flag = input("Exit(1/0)") == 0;
+                print(AppSettings.winPrommpt[Languane]);
+                Flag = input(AppSettings.countinuePrompt[Languane]) == 0;
                 map.setUpMap();
                 Iswin = map.isWin();
-                continue ;
+                continue;
             }
 
-            /** 获取当前的系统时间，与初始时间相减就是程序运行的毫秒数，除以1000就是秒数*/
-            endTime =  System.currentTimeMillis();
-            usedTime = (endTime-startTime)/1000;
-            print("you spent " , usedTime , "seconds on this chess.\n");
+            /** 获取当前的系统时间，与初始时间相减就是程序运行的毫秒数，除以1000就是秒数 */
+            endTime = System.currentTimeMillis();
+            usedTime = (endTime - startTime) / 1000;
+            print(AppSettings.timeUsedPrompt[Languane][0], usedTime, AppSettings.timeUsedPrompt[Languane][1],"\n");
 
         }
+        print(AppSettings.sayGoodBye[Languane]);
     }
 
     /**
@@ -76,11 +89,15 @@ public class App {
      * 类比 python 的 input
      */
     private static int input(String prompt) {
- 
-        int temp;
-        print(prompt , ":");
 
-        Scanner scanner = new Scanner(System.in) ;
+        // 临时变量
+        int temp;
+
+        // 打印提示语
+        print(prompt, ":");
+
+        // 新建扫描器，输入
+        Scanner scanner = new Scanner(System.in);
         if (scanner.hasNext()) {
             temp = scanner.nextInt();
         } else {
@@ -88,13 +105,13 @@ public class App {
         }
 
         return temp;
-    } 
+    }
 
     /**
      * @param args 要打印的字符
-     * 类比 python 的 print
+     *             类比 python 的 print
      */
-    private static void print(Object...args){
+    private static void print(Object... args) {
         for (Object string : args) {
             System.out.print(string);
         }
@@ -102,16 +119,16 @@ public class App {
 
     /**
      * @param who 落子者
-     * 用来输入 x , y 坐标
+     *            用来输入 x , y 坐标
      */
-    public static void getIn( char who){
+    public static void getIn(char who) {
 
-        if (! (map.downChess(input("your Chess's x"), input("your Chess's y"), who))){
-            print("\033[31m" , "Seems like there's someting wrong ,Enter again\n" , "\033[m");
-            getIn( who );
-            return ;
-        }  
-        return ;
+        if (!(map.downChess(input(AppSettings.getInPrompt[Languane][0]), input(AppSettings.getInPrompt[Languane][0]), who))) {
+            print("\033[31m", AppSettings.getInErrorPrompt[Languane], "\n", "\033[m");
+            getIn(who);
+            return;
+        }
+        return;
     }
-    
+
 }
