@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import ChessMap.ChessMap;
 import java.util.concurrent.TimeUnit;
+import java.lang.Runtime;
 
 import settings.AppSettings;
 
@@ -16,6 +17,9 @@ public class App {
      */
     public static void main(String[] args) throws Exception {
         Languane = input("Languae:(0-EN/1-CH)");
+
+        //get runtime
+        Runtime rt = Runtime.getRuntime();
 
         // 输出title
         print("===", AppSettings.title[Languane] , "===\n");
@@ -81,6 +85,8 @@ public class App {
 
         }
         print(AppSettings.sayGoodBye[Languane]);
+
+        Runtime.getRuntime().exec("clear");
     }
 
     /**
